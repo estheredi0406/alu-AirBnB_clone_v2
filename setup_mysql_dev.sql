@@ -7,6 +7,9 @@ CREATE USER IF NOT EXISTS 'hbnb_dev'@'localhost' IDENTIFIED BY 'hbnb_dev_pwd';
 --Print a confirmation message--
 SELECT 'hbnb_dev_db' AS database_name;
 
+-- Set the authentication method to mysql_native_password (if needed)
+ALTER USER 'hbnb_dev'@'localhost' IDENTIFIED WITH mysql_native_password BY 'hbnb_dev_pwd';
+
 --grant all privileges to the user in the database--
 GRANT ALL PRIVILEGES ON hbnb_dev_db.* TO 'hbnb_dev'@'localhost';
 
