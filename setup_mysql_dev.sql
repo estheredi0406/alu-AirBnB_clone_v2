@@ -1,20 +1,11 @@
---create our database if it does not exist--
+-- create the data base if it doesnt exit
 CREATE DATABASE IF NOT EXISTS hbnb_dev_db;
 
---create a new user in  the localhost with all privileges--
+-- Create a new use in the localhost COMMENT
 CREATE USER IF NOT EXISTS 'hbnb_dev'@'localhost' IDENTIFIED BY 'hbnb_dev_pwd';
 
---Print a confirmation message--
-SELECT 'hbnb_dev_db' AS database_name;
-
--- Set the authentication method to mysql_native_password (if needed)
-ALTER USER 'hbnb_dev'@'localhost' IDENTIFIED WITH mysql_native_password BY 'hbnb_dev_pwd';
-
---grant all privileges to the user in the database--
+-- Grantt the user hbnb_dev all privileges on the database hbnb_dev_db
 GRANT ALL PRIVILEGES ON hbnb_dev_db.* TO 'hbnb_dev'@'localhost';
 
---Grant all Select privileges on the performance_schema database to the user--
+-- Grant all Select Privileges on performance_schema to hbnb_dev
 GRANT SELECT ON performance_schema.* TO 'hbnb_dev'@'localhost';
-
--- Flush privileges to apply the changes--
-FLUSH PRIVILEGES;
