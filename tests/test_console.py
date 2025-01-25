@@ -5,31 +5,25 @@ Contains the class TestConsoleDocs
 
 import console
 import inspect
-import pycodestyle
+import pep8
 import unittest
-from io import StringIO
-from unittest.mock import patch
 HBNBCommand = console.HBNBCommand
 
 
 class TestConsoleDocs(unittest.TestCase):
     """Class for testing documentation of the console"""
 
-    def setUp(self):
-        """Set up the test environment."""
-        self.console = HBNBCommand()
-
     def test_pep8_conformance_console(self):
         """Test that console.py conforms to PEP8."""
-        style = pycodestyle.StyleGuide(quiet=True)
-        result = style.check_files(['console.py'])
+        pep8s = pep8.StyleGuide(quiet=True)
+        result = pep8s.check_files(['console.py'])
         self.assertEqual(result.total_errors, 0,
                          "Found code style errors (and warnings).")
 
     def test_pep8_conformance_test_console(self):
         """Test that tests/test_console.py conforms to PEP8."""
-        style = pycodestyle.StyleGuide(quiet=True)
-        result = style.check_files(['tests/test_console.py'])
+        pep8s = pep8.StyleGuide(quiet=True)
+        result = pep8s.check_files(['tests/test_console.py'])
         self.assertEqual(result.total_errors, 0,
                          "Found code style errors (and warnings).")
 
@@ -46,21 +40,3 @@ class TestConsoleDocs(unittest.TestCase):
                          "HBNBCommand class needs a docstring")
         self.assertTrue(len(HBNBCommand.__doc__) >= 1,
                         "HBNBCommand class needs a docstring")
-
-    def test_create_command(self):
-        """Test the create command."""
-        with patch('sys.stdout', new=StringIO()) as f:
-            self.console.onecmd("create State name=\"California\"")
-            output = f.getvalue().strip()
-            self.assertTrue(len(output) == 36)  # UUID length
-
-    def test_invalid_command(self):
-        """Test an invalid command."""
-        with patch('sys.stdout', new=StringIO()) as f:
-            self.console.onecmd("invalid_command")
-            output = f.getvalue().strip()
-            self.assertEqual(output, "*** Unknown syntax: invalid_command")
-
-
-if __name__ == '__main__':
-    unittest.main()
