@@ -4,6 +4,7 @@ Contains the class TestConsoleDocs
 """
 
 import console
+import inspect
 import pycodestyle
 import unittest
 from io import StringIO
@@ -13,6 +14,10 @@ HBNBCommand = console.HBNBCommand
 
 class TestConsoleDocs(unittest.TestCase):
     """Class for testing documentation of the console"""
+
+    def setUp(self):
+        """Set up the test environment."""
+        self.console = HBNBCommand()
 
     def test_pep8_conformance_console(self):
         """Test that console.py conforms to PEP8."""
